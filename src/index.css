@@ -51,6 +51,7 @@ body {
   position: sticky !important;
   right: 0;
   background: #fff !important;
+  min-width: 50px !important;
   /* Other styles */
 }
 [data-column-id="1"] {
@@ -59,6 +60,6 @@ body {
   left: 0;
   background: #fff !important;
   z-index: 999 !important;
-  min-width: 100px !important;
+  min-width: 80px !important;
   /* Other styles */
 }

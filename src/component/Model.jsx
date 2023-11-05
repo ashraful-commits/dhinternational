@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "./FormInput";
 import Select from "react-select";
 import {
@@ -8,11 +8,12 @@ import {
   getFirestore,
   onSnapshot,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 
 import { toast } from "react-toastify";
 import { app } from "../Firebase.config";
-const Model = ({ setModel }) => {
+const Model = ({ setModel, singleData, title, singleId }) => {
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -33,6 +34,7 @@ const Model = ({ setModel }) => {
     orderSource: "",
     address: "",
   });
+
   const handleInputChange = (e) => {
     setInput((prev) => ({
       ...prev,
@@ -115,48 +117,72 @@ const Model = ({ setModel }) => {
     { label: "Thakurgaon", value: "Thakurgaon" },
   ];
   //=============================onsubmit
-  console.log(input);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input);
     const db = getFirestore(app);
-    await addDoc(collection(db, "customer"), {
-      ...input,
-      timestamp: serverTimestamp(),
-    }).then(() => {
-      toast(`Customer Created!`, {
-        position: "bottom-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+    if (singleId) {
+      const cutomerUpdate = doc(db, "customer", singleId);
+
+      // Set the "capital" field of the city 'DC'
+      await updateDoc(cutomerUpdate, {
+        ...input,
+      }).then(() => {
+        setModel(false);
+        toast(`Customer updated!`, {
+          position: "bottom-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       });
-      setModel(false);
-      setInput({
-        name: "",
-        email: "",
-        productName: "",
-        gender: "",
-        city: "",
-        mobile: "",
-        refMobile: "",
-        mobileType: "",
-        emailType: "",
-        occupation: "",
-        orderDate: "",
-        birthday: "",
-        deliveryDate: "",
-        deliveryType: "",
-        bankName: "",
-        cashoutType: "",
-        orderSource: "",
-        address: "",
+    } else {
+      const db = getFirestore(app);
+      await addDoc(collection(db, "customer"), {
+        ...input,
+        timestamp: serverTimestamp(),
+      }).then(() => {
+        toast(`Customer Created!`, {
+          position: "bottom-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setModel(false);
+        setInput({
+          name: "",
+          email: "",
+          productName: "",
+          gender: "",
+          city: "",
+          mobile: "",
+          refMobile: "",
+          mobileType: "",
+          emailType: "",
+          occupation: "",
+          orderDate: "",
+          birthday: "",
+          deliveryDate: "",
+          deliveryType: "",
+          bankName: "",
+          cashoutType: "",
+          orderSource: "",
+          address: "",
+        });
       });
-    });
+    }
   };
+  useEffect(() => {
+    setInput({ ...singleData });
+  }, [singleData]);
   return (
     <div className="w-screen h-screen z-[9999] bg-blue-300 flex justify-center items-center bg-opacity-90 absolute top-0 left-0">
       <button
@@ -182,7 +208,7 @@ const Model = ({ setModel }) => {
       >
         <div className="sticky top-0 py-1  border-b col-span-2 bg-white w-full">
           <h1 className="text-[20px]   text-blue-500 font-bold text-center uppercase">
-            Add new customer
+            {title ? title : "Add new"} customer
           </h1>
         </div>
         <div className="p-2  grid gap-2 grid-cols-2">
@@ -509,7 +535,7 @@ const Model = ({ setModel }) => {
               type="submit"
               className="bg-purple-500 h-[35px] hover:bg-purple-800 transition-all duration-500 ease-in-out text-white uppercase text-[14px] font-bold"
             >
-              Add customer
+              {title ? title : "Add"} customer
             </button>
           </div>
         </div>

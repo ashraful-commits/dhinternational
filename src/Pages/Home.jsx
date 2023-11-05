@@ -3,10 +3,22 @@ import DataTable from "react-data-table-component";
 import Header from "../component/Header";
 import SerarchBar from "../component/SearchBar";
 import SearchBar from "../component/SearchBar";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+} from "firebase/firestore";
 import { app } from "../Firebase.config";
+import { toast } from "react-toastify";
+import Model from "../component/Model";
 
 const Home = () => {
+  const [singleData, setSingleData] = useState({});
+  const [singleId, setsingleId] = useState(null);
+  const [model, setModel] = useState(false);
   const columns = [
     {
       name: "Avatar",
@@ -85,7 +97,7 @@ const Home = () => {
       name: "Action",
       selector: (row) => (
         <div className="flex gap-2 items-center justify-center">
-          <button>
+          <button onClick={() => handleEdit(row.docId)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -101,7 +113,7 @@ const Home = () => {
               <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
             </svg>
           </button>
-          <button>
+          <button onClick={() => handleDelete(row.docId)}>
             <svg
               width="18"
               height="18"
@@ -122,6 +134,28 @@ const Home = () => {
 
   const [customer, setCustomer] = useState([]);
   const db = getFirestore(app);
+  //================================handle
+  const handleDelete = async (id) => {
+    await deleteDoc(doc(db, "customer", id)).then(() => {
+      setCustomer([...customer.filter((item) => item.docId !== id)]);
+      toast(`Customer Deleted!`, {
+        position: "bottom-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    });
+  };
+  const handleEdit = async (id) => {
+    setsingleId(id);
+    const singleData = customer.find((item) => item.docId == id);
+    setSingleData(singleData);
+    setModel(true);
+  };
   useEffect(() => {
     const customerRef = collection(db, "customer");
     // Get all documents initially
@@ -142,6 +176,14 @@ const Home = () => {
   }, []);
   return (
     <div className="w-full relative">
+      {model && (
+        <Model
+          title="Edit"
+          setModel={setModel}
+          singleId={singleId}
+          singleData={singleData}
+        />
+      )}
       <Header />
       <SearchBar />
       <DataTable
