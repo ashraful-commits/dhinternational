@@ -119,43 +119,43 @@ const Model = ({ setModel }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(input);
-    // const db = getFirestore(app);
-    // await addDoc(collection(db, "customer"), {
-    //   ...input,
-    //   timestamp: serverTimestamp(),
-    // }).then(() => {
-    //   toast(`Customer Created!`, {
-    //     position: "bottom-center",
-    //     autoClose: 1000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "dark",
-    //   });
-    //   setModel(false);
-    //   setInput({
-    //     name: "",
-    //     email: "",
-    //     productName: "",
-    //     gender: "",
-    //     city: "",
-    //     mobile: "",
-    //     refMobile: "",
-    //     mobileType: "",
-    //     emailType: "",
-    //     occupation: "",
-    //     orderDate: "",
-    //     birthday: "",
-    //     deliveryDate: "",
-    //     deliveryType: "",
-    //     bankName: "",
-    //     cashoutType: "",
-    //     orderSource: "",
-    //     address: "",
-    //   });
-    // });
+    const db = getFirestore(app);
+    await addDoc(collection(db, "customer"), {
+      ...input,
+      timestamp: serverTimestamp(),
+    }).then(() => {
+      toast(`Customer Created!`, {
+        position: "bottom-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setModel(false);
+      setInput({
+        name: "",
+        email: "",
+        productName: "",
+        gender: "",
+        city: "",
+        mobile: "",
+        refMobile: "",
+        mobileType: "",
+        emailType: "",
+        occupation: "",
+        orderDate: "",
+        birthday: "",
+        deliveryDate: "",
+        deliveryType: "",
+        bankName: "",
+        cashoutType: "",
+        orderSource: "",
+        address: "",
+      });
+    });
   };
   return (
     <div className="w-screen h-screen z-[9999] bg-blue-300 flex justify-center items-center bg-opacity-90 absolute top-0 left-0">
@@ -221,11 +221,8 @@ const Model = ({ setModel }) => {
               className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
               id=""
             >
-              <option
-                selected
-                className="py-[5px] text-[14px]"
-                value="Personal"
-              >
+              <option className="py-[5px] text-[14px]">...select...</option>
+              <option className="py-[5px] text-[14px]" value="Personal">
                 Personal
               </option>
               <option className="py-[5px] text-[14px]" value="Office">
@@ -260,11 +257,8 @@ const Model = ({ setModel }) => {
               className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
               id=""
             >
-              <option
-                selected
-                className="py-[5px] text-[14px]"
-                value="Personal"
-              >
+              <option className="py-[5px] text-[14px]">...select...</option>
+              <option className="py-[5px] text-[14px]" value="Personal">
                 Personal
               </option>
               <option className="py-[5px] text-[14px]" value="Office">
@@ -307,6 +301,7 @@ const Model = ({ setModel }) => {
               className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
               id=""
             >
+              <option className="py-[5px] text-[14px]">...select...</option>
               <option className="py-[5px] text-[14px]" value="Cash on delivery">
                 Cash on delivery
               </option>
@@ -320,11 +315,7 @@ const Model = ({ setModel }) => {
               <option className="py-[5px] text-[14px]" value="Pickup point">
                 Pickup point
               </option>
-              <option
-                selected
-                className="py-[5px] text-[14px]"
-                value="Express delivery"
-              >
+              <option className="py-[5px] text-[14px]" value="Express delivery">
                 Express delivery
               </option>
               <option
@@ -346,6 +337,7 @@ const Model = ({ setModel }) => {
               className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
               id=""
             >
+              <option className="py-[5px] text-[14px]">...select...</option>
               <option className="py-[5px] text-[14px]" value="Bkash">
                 Bkash
               </option>
@@ -400,14 +392,11 @@ const Model = ({ setModel }) => {
               className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
               id=""
             >
+              <option className="py-[5px] text-[14px]">...select...</option>
               <option className="py-[5px] text-[14px]" value="Cash on delivery">
                 Cash on delivery
               </option>
-              <option
-                selected
-                className="py-[5px] text-[14px]"
-                value="Bank transfer"
-              >
+              <option className="py-[5px] text-[14px]" value="Bank transfer">
                 Bank transfer
               </option>
               <option className="py-[5px] text-[14px]" value="PayPal">
@@ -440,7 +429,8 @@ const Model = ({ setModel }) => {
               className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
               id=""
             >
-              <option selected className="py-[5px] text-[14px]" value="Man">
+              <option className="py-[5px] text-[14px]">...select...</option>
+              <option className="py-[5px] text-[14px]" value="Man">
                 Man
               </option>
               <option className="py-[5px] text-[14px]" value="Women">
@@ -460,7 +450,8 @@ const Model = ({ setModel }) => {
               className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
               id=""
             >
-              <option selected className="py-[5px] text-[14px]" value="Pending">
+              <option className="py-[5px] text-[14px]">...select...</option>
+              <option className="py-[5px] text-[14px]" value="Pending">
                 Pending
               </option>
               <option className="py-[5px] text-[14px]" value="Complete">
@@ -488,11 +479,11 @@ const Model = ({ setModel }) => {
               className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
               id=""
             >
-              <option
-                selected
-                className="py-[5px] text-[14px]"
-                value="Facebook"
-              >
+              <option className="py-[5px] text-[14px]">...select...</option>
+              <option className="py-[5px] text-[14px]" value="Mobile">
+                Mobile
+              </option>
+              <option className="py-[5px] text-[14px]" value="Facebook">
                 Facebook
               </option>
               <option className="py-[5px] text-[14px]" value="WhatsApp">

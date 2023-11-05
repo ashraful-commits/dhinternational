@@ -34,7 +34,7 @@ const Home = () => {
     },
     {
       name: "Ref Number",
-      selector: (row) => row.refNumber,
+      selector: (row) => row.refMobile,
     },
     {
       name: "Number Type",
@@ -112,7 +112,6 @@ const Home = () => {
         pagination
         columns={columns}
         data={customer}
-        expandableRows
       />
     </div>
   );
