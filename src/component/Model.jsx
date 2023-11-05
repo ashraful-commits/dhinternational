@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import FormInput from "./FormInput";
+import Select from "react-select";
+import {
+  addDoc,
+  collection,
+  doc,
+  getFirestore,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
 
+import { toast } from "react-toastify";
+import { app } from "../Firebase.config";
 const Model = ({ setModel }) => {
   const [input, setInput] = useState({
     name: "",
@@ -20,12 +31,131 @@ const Model = ({ setModel }) => {
     bankName: "",
     cashoutType: "",
     orderSource: "",
+    address: "",
   });
   const handleInputChange = (e) => {
     setInput((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+  //==========================
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  const handleCityChange = (selectedOption) => {
+    setSelectedCity(selectedOption);
+    setInput((prev) => ({
+      ...prev,
+      city: selectedOption.value,
+    }));
+  };
+
+  const cities = [
+    { label: "Dhaka", value: "Dhaka" },
+    { label: "Barisal", value: "Barisal" },
+    { label: "Chittagong", value: "Chittagong" },
+    { label: "Comilla", value: "Comilla" },
+    { label: "Faridpur", value: "Faridpur" },
+    { label: "Jessore", value: "Jessore" },
+    { label: "Khulna", value: "Khulna" },
+    { label: "Mymensingh", value: "Mymensingh" },
+    { label: "Noakhali", value: "Noakhali" },
+    { label: "Pabna", value: "Pabna" },
+    { label: "Rajshahi", value: "Rajshahi" },
+    { label: "Sylhet", value: "Sylhet" },
+    { label: "Bagerhat", value: "Bagerhat" },
+    { label: "Bandarban", value: "Bandarban" },
+    { label: "Barguna", value: "Barguna" },
+    { label: "Bhola", value: "Bhola" },
+    { label: "Bogra", value: "Bogra" },
+    { label: "Brahmanbaria", value: "Brahmanbaria" },
+    { label: "Chandpur", value: "Chandpur" },
+    { label: "Chapai Nawabganj", value: "Chapai Nawabganj" },
+    { label: "Chuadanga", value: "Chuadanga" },
+    { label: "Cox's Bazar", value: "Cox's Bazar" },
+    { label: "Dinajpur", value: "Dinajpur" },
+    { label: "Feni", value: "Feni" },
+    { label: "Gaibandha", value: "Gaibandha" },
+    { label: "Gazipur", value: "Gazipur" },
+    { label: "Gopalganj", value: "Gopalganj" },
+    { label: "Habiganj", value: "Habiganj" },
+    { label: "Jamalpur", value: "Jamalpur" },
+    { label: "Jhalokati", value: "Jhalokati" },
+    { label: "Jhenaidah", value: "Jhenaidah" },
+    { label: "Joypurhat", value: "Joypurhat" },
+    { label: "Khagrachari", value: "Khagrachari" },
+    { label: "Kishoreganj", value: "Kishoreganj" },
+    { label: "Kurigram", value: "Kurigram" },
+    { label: "Kushtia", value: "Kushtia" },
+    { label: "Lakshmipur", value: "Lakshmipur" },
+    { label: "Lalmonirhat", value: "Lalmonirhat" },
+    { label: "Madaripur", value: "Madaripur" },
+    { label: "Magura", value: "Magura" },
+    { label: "Manikganj", value: "Manikganj" },
+    { label: "Meherpur", value: "Meherpur" },
+    { label: "Moulvibazar", value: "Moulvibazar" },
+    { label: "Munshiganj", value: "Munshiganj" },
+    { label: "Naogaon", value: "Naogaon" },
+    { label: "Narail", value: "Narail" },
+    { label: "Narayanganj", value: "Narayanganj" },
+    { label: "Narsingdi", value: "Narsingdi" },
+    { label: "Natore", value: "Natore" },
+    { label: "Nawabganj", value: "Nawabganj" },
+    { label: "Netrokona", value: "Netrokona" },
+    { label: "Nilphamari", value: "Nilphamari" },
+    { label: "Panchagarh", value: "Panchagarh" },
+    { label: "Patuakhali", value: "Patuakhali" },
+    { label: "Pirojpur", value: "Pirojpur" },
+    { label: "Rajbari", value: "Rajbari" },
+    { label: "Rangamati", value: "Rangamati" },
+    { label: "Sherpur", value: "Sherpur" },
+    { label: "Sirajganj", value: "Sirajganj" },
+    { label: "Sunamganj", value: "Sunamganj" },
+    { label: "Tangail", value: "Tangail" },
+    { label: "Thakurgaon", value: "Thakurgaon" },
+  ];
+  //=============================onsubmit
+  console.log(input);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(input);
+    // const db = getFirestore(app);
+    // await addDoc(collection(db, "customer"), {
+    //   ...input,
+    //   timestamp: serverTimestamp(),
+    // }).then(() => {
+    //   toast(`Customer Created!`, {
+    //     position: "bottom-center",
+    //     autoClose: 1000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "dark",
+    //   });
+    //   setModel(false);
+    //   setInput({
+    //     name: "",
+    //     email: "",
+    //     productName: "",
+    //     gender: "",
+    //     city: "",
+    //     mobile: "",
+    //     refMobile: "",
+    //     mobileType: "",
+    //     emailType: "",
+    //     occupation: "",
+    //     orderDate: "",
+    //     birthday: "",
+    //     deliveryDate: "",
+    //     deliveryType: "",
+    //     bankName: "",
+    //     cashoutType: "",
+    //     orderSource: "",
+    //     address: "",
+    //   });
+    // });
   };
   return (
     <div className="w-screen h-screen z-[9999] bg-blue-300 flex justify-center items-center bg-opacity-90 absolute top-0 left-0">
@@ -46,7 +176,10 @@ const Model = ({ setModel }) => {
           />
         </svg>
       </button>
-      <div className=" min-w-[300px] p-3 rounded-lg bg-white grid gap-2 grid-cols-2 min-h-auto">
+      <form
+        onSubmit={handleSubmit}
+        className=" min-w-[300px] min-h-[500px] h-[500px] overflow-y-auto p-3 rounded-lg bg-white grid gap-2 grid-cols-2 min-h-auto"
+      >
         <FormInput
           type="text"
           label="Name"
@@ -82,7 +215,7 @@ const Model = ({ setModel }) => {
             className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
             id=""
           >
-            <option className="py-[5px] text-[14px]" value="Personal">
+            <option selected className="py-[5px] text-[14px]" value="Personal">
               Personal
             </option>
             <option className="py-[5px] text-[14px]" value="Office">
@@ -98,6 +231,14 @@ const Model = ({ setModel }) => {
           value={input.mobile}
           handleInputChange={handleInputChange}
         />
+        <FormInput
+          name="refMobile"
+          placeholder="Ref Mobile"
+          type="text"
+          label="Ref Mobile"
+          value={input.refMobile}
+          handleInputChange={handleInputChange}
+        />
         <div className="flex flex-col gap-2">
           <label htmlFor="" className="mt-[6px]">
             Mobile type
@@ -109,7 +250,7 @@ const Model = ({ setModel }) => {
             className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
             id=""
           >
-            <option className="py-[5px] text-[14px]" value="Personal">
+            <option selected className="py-[5px] text-[14px]" value="Personal">
               Personal
             </option>
             <option className="py-[5px] text-[14px]" value="Office">
@@ -146,9 +287,9 @@ const Model = ({ setModel }) => {
             Delivery type
           </label>
           <select
-            name="mobileType"
+            name="deliveryType"
             onChange={handleInputChange}
-            value={input.mobileType}
+            value={input.deliveryType}
             className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
             id=""
           >
@@ -165,13 +306,39 @@ const Model = ({ setModel }) => {
             <option className="py-[5px] text-[14px]" value="Pickup point">
               Pickup point
             </option>
-            <option className="py-[5px] text-[14px]" value="Express delivery">
+            <option
+              selected
+              className="py-[5px] text-[14px]"
+              value="Express delivery"
+            >
               Express delivery
             </option>
             <option className="py-[5px] text-[14px]" value="Scheduled delivery">
               Scheduled delivery
             </option>
-            {/* Add as many additional delivery types as needed */}
+          </select>
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="" className="mt-[6px]">
+            Bank Name
+          </label>
+          <select
+            name="bankName"
+            onChange={handleInputChange}
+            value={input.bankName}
+            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+            id=""
+          >
+            <option className="py-[5px] text-[14px]" value="Bkash">
+              Bkash
+            </option>
+            <option className="py-[5px] text-[14px]" value="DBBL">
+              DBBL
+            </option>
+            {/* Add more delivery types here */}
+            <option className="py-[5px] text-[14px]" value="Nogod">
+              Nogod
+            </option>
           </select>
         </div>
         <FormInput
@@ -180,6 +347,28 @@ const Model = ({ setModel }) => {
           type="date"
           label="Birthday"
           value={input.birthday}
+          handleInputChange={handleInputChange}
+        />
+        <div className="flex flex-col gap-2">
+          <label htmlFor="" className="mt-[6px]">
+            City
+          </label>
+          <Select
+            name="city"
+            value={selectedCity}
+            onChange={handleCityChange}
+            options={cities}
+            placeholder="Select a city"
+            isSearchable={true}
+            className="bg-blue-300"
+          />
+        </div>
+        <FormInput
+          name="address"
+          placeholder="Address"
+          type="text"
+          label="Address"
+          value={input.address}
           handleInputChange={handleInputChange}
         />
 
@@ -197,7 +386,11 @@ const Model = ({ setModel }) => {
             <option className="py-[5px] text-[14px]" value="Cash on delivery">
               Cash on delivery
             </option>
-            <option className="py-[5px] text-[14px]" value="Bank transfer">
+            <option
+              selected
+              className="py-[5px] text-[14px]"
+              value="Bank transfer"
+            >
               Bank transfer
             </option>
             <option className="py-[5px] text-[14px]" value="PayPal">
@@ -227,7 +420,7 @@ const Model = ({ setModel }) => {
             className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
             id=""
           >
-            <option className="py-[5px] text-[14px]" value="Man">
+            <option selected className="py-[5px] text-[14px]" value="Man">
               Man
             </option>
             <option className="py-[5px] text-[14px]" value="Women">
@@ -235,206 +428,7 @@ const Model = ({ setModel }) => {
             </option>
           </select>
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            City
-          </label>
-          <select
-            name="city"
-            onChange={handleInputChange}
-            value={input.city}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option value="">Select a district</option>
-            <option className="py-[5px] text-[14px]" value="Dhaka">
-              Dhaka
-            </option>
-            <option className="py-[5px] text-[14px]" value="Borisal">
-              Barisal
-            </option>
-            <option className="py-[5px] text-[14px]" value="Chittagong">
-              Chittagong
-            </option>
-            <option className="py-[5px] text-[14px]" value="Comilla">
-              Comilla
-            </option>
-            <option className="py-[5px] text-[14px]" value="Faridpur">
-              Faridpur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Jessore">
-              Jessore
-            </option>
-            <option className="py-[5px] text-[14px]" value="Khulna">
-              Khulna
-            </option>
-            <option className="py-[5px] text-[14px]" value="Mymensingh">
-              Mymensingh
-            </option>
-            <option className="py-[5px] text-[14px]" value="Noakhali">
-              Noakhali
-            </option>
-            <option className="py-[5px] text-[14px]" value="Pabna">
-              Pabna
-            </option>
-            <option className="py-[5px] text-[14px]" value="Rajshahi">
-              Rajshahi
-            </option>
-            <option className="py-[5px] text-[14px]" value="Sylhet">
-              Sylhet
-            </option>
-            <option className="py-[5px] text-[14px]" value="Bagerhat">
-              Bagerhat
-            </option>
-            <option className="py-[5px] text-[14px]" value="Bandarban">
-              Bandarban
-            </option>
-            <option className="py-[5px] text-[14px]" value="Barguna">
-              Barguna
-            </option>
-            <option className="py-[5px] text-[14px]" value="Bhola">
-              Bhola
-            </option>
-            <option className="py-[5px] text-[14px]" value="Bogra">
-              Bogra
-            </option>
-            <option className="py-[5px] text-[14px]" value="Brahmanbaria">
-              Brahmanbaria
-            </option>
-            <option className="py-[5px] text-[14px]" value="Chandpur">
-              Chandpur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Chapai Nawabganj">
-              Chapai Nawabganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Chuadanga">
-              Chuadanga
-            </option>
-            <option className="py-[5px] text-[14px]" value="Cox's Bazar">
-              Cox's Bazar
-            </option>
-            <option className="py-[5px] text-[14px]" value="Dinajpur">
-              Dinajpur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Feni">
-              Feni
-            </option>
-            <option className="py-[5px] text-[14px]" value="Gaibandha">
-              Gaibandha
-            </option>
-            <option className="py-[5px] text-[14px]" value="Gazipur">
-              Gazipur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Gopalganj">
-              Gopalganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Habiganj">
-              Habiganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Jamalpur">
-              Jamalpur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Jhalokati">
-              Jhalokati
-            </option>
-            <option className="py-[5px] text-[14px]" value="Jhenaidah">
-              Jhenaidah
-            </option>
-            <option className="py-[5px] text-[14px]" value="Joypurhat">
-              Joypurhat
-            </option>
-            <option className="py-[5px] text-[14px]" value="Khagrachari">
-              Khagrachari
-            </option>
-            <option className="py-[5px] text-[14px]" value="Kishoreganj">
-              Kishoreganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Kurigram">
-              Kurigram
-            </option>
-            <option className="py-[5px] text-[14px]" value="Kushtia">
-              Kushtia
-            </option>
-            <option className="py-[5px] text-[14px]" value="Lakshmipur">
-              Lakshmipur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Lalmonirhat">
-              Lalmonirhat
-            </option>
-            <option className="py-[5px] text-[14px]" value="Madaripur">
-              Madaripur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Magura">
-              Magura
-            </option>
-            <option className="py-[5px] text-[14px]" value="Manikganj">
-              Manikganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Meherpur">
-              Meherpur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Moulvibazar">
-              Moulvibazar
-            </option>
-            <option className="py-[5px] text-[14px]" value="Munshiganj">
-              Munshiganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Naogaon">
-              Naogaon
-            </option>
-            <option className="py-[5px] text-[14px]" value="Narail">
-              Narail
-            </option>
-            <option className="py-[5px] text-[14px]" value="Narayanganj">
-              Narayanganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Narsingdi">
-              Narsingdi
-            </option>
-            <option className="py-[5px] text-[14px]" value="Natore">
-              Natore
-            </option>
-            <option className="py-[5px] text-[14px]" value="Nawabganj">
-              Nawabganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Netrokona">
-              Netrokona
-            </option>
-            <option className="py-[5px] text-[14px]" value="Nilphamari">
-              Nilphamari
-            </option>
-            <option className="py-[5px] text-[14px]" value="Panchagarh">
-              Panchagarh
-            </option>
-            <option className="py-[5px] text-[14px]" value="Patuakhali">
-              Patuakhali
-            </option>
-            <option className="py-[5px] text-[14px]" value="Pirojpur">
-              Pirojpur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Rajbari">
-              Rajbari
-            </option>
-            <option className="py-[5px] text-[14px]" value="Rangamati">
-              Rangamati
-            </option>
-            <option className="py-[5px] text-[14px]" value="Sherpur">
-              Sherpur
-            </option>
-            <option className="py-[5px] text-[14px]" value="Sirajganj">
-              Sirajganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Sunamganj">
-              Sunamganj
-            </option>
-            <option className="py-[5px] text-[14px]" value="Tangail">
-              Tangail
-            </option>
-            <option className="py-[5px] text-[14px]" value="Thakurgaon">
-              Thakurgaon
-            </option>
-          </select>
-        </div>
+
         <div className="flex flex-col gap-2">
           <label htmlFor="" className="mt-[6px]">
             Order status
@@ -446,7 +440,7 @@ const Model = ({ setModel }) => {
             className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
             id=""
           >
-            <option className="py-[5px] text-[14px]" value="Pending">
+            <option selected className="py-[5px] text-[14px]" value="Pending">
               Pending
             </option>
             <option className="py-[5px] text-[14px]" value="Complete">
@@ -474,7 +468,7 @@ const Model = ({ setModel }) => {
             className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
             id=""
           >
-            <option className="py-[5px] text-[14px]" value="Facebook">
+            <option selected className="py-[5px] text-[14px]" value="Facebook">
               Facebook
             </option>
             <option className="py-[5px] text-[14px]" value="WhatsApp">
@@ -492,7 +486,18 @@ const Model = ({ setModel }) => {
             {/* Add more order sources here */}
           </select>
         </div>
-      </div>
+        <div className="flex flex-col gap-[5px]">
+          <button className="bg-red-500 h-[32px] hover:bg-red-800 transition-all duration-500 ease-in-out text-white font-bold uppercase">
+            pdf
+          </button>
+          <button
+            type="submit"
+            className="bg-purple-500 h-[35px] hover:bg-purple-800 transition-all duration-500 ease-in-out text-white uppercase text-[14px] font-bold"
+          >
+            Add customer
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
