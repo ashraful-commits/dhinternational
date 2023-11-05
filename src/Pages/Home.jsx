@@ -7,9 +7,9 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
   getDocs,
   getFirestore,
+  onSnapshot,
 } from "firebase/firestore";
 import { app } from "../Firebase.config";
 import { toast } from "react-toastify";
@@ -17,7 +17,7 @@ import Model from "../component/Model";
 
 const Home = () => {
   const [singleData, setSingleData] = useState({});
-  const [singleId, setsingleId] = useState(null);
+  const [singleId, setSingleId] = useState(null);
   const [model, setModel] = useState(false);
   const columns = [
     {
@@ -155,7 +155,7 @@ const Home = () => {
     });
   };
   const handleEdit = async (id) => {
-    setsingleId(id);
+    setSingleId(id);
     const singleData = customer.find((item) => item.docId == id);
     setSingleData(singleData);
     setModel(true);
@@ -170,14 +170,19 @@ const Home = () => {
           allCustomer.push({ docId: doc.id, ...doc.data() });
         });
         setCustomer(allCustomer);
+
+        onSnapshot(customerRef, (querySnapshot) => {
+          let updatedCustomer = [];
+          querySnapshot.forEach((doc) => {
+            updatedCustomer.push({ docId: doc.id, ...doc.data() });
+          });
+          setCustomer(updatedCustomer);
+        });
       })
       .catch((error) => {
         console.error("Error getting documents: ", error);
       });
-
-    // Listen to real-time updates on the "cities" collection
-    // const unsubscribe = onSnapshot(customer, (querySnapshot) => {});
-  }, []);
+  }, [db]);
   return (
     <div className="w-full relative">
       {model && (
