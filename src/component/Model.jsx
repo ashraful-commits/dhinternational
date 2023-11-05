@@ -161,7 +161,7 @@ const Model = ({ setModel }) => {
     <div className="w-screen h-screen z-[9999] bg-blue-300 flex justify-center items-center bg-opacity-90 absolute top-0 left-0">
       <button
         onClick={() => setModel(false)}
-        className="absolute top-5 right-5 border rounded-full p-1 hover:bg-blue-500 transition-all ease-in-out duration-500 "
+        className="absolute top-5 right-5 border rounded-full p-[12px] hover:bg-blue-500 transition-all ease-in-out duration-500 "
       >
         <svg
           width="24px"
@@ -180,7 +180,7 @@ const Model = ({ setModel }) => {
         onSubmit={handleSubmit}
         className=" min-w-[300px] min-h-[500px] h-[500px] overflow-y-auto  relative rounded-lg  bg-white min-h-auto"
       >
-        <div className="sticky top-[0] py-1  border-b col-span-2 bg-white w-full">
+        <div className="sticky top-0 py-1  border-b col-span-2 bg-white w-full">
           <h1 className="text-[20px]   text-blue-500 font-bold text-center uppercase">
             Add new customer
           </h1>
@@ -501,7 +501,7 @@ const Model = ({ setModel }) => {
               {/* Add more order sources here */}
             </select>
           </div>
-          <div className="grid grid-cols-2  gap-[5px] sticky bottom-0 col-span-2">
+          <div className="grid grid-cols-2 bg-white  gap-[5px] sticky bottom-[0] pb-[12px] col-span-2">
             <button className="bg-red-500 h-[35px] hover:bg-red-800 transition-all duration-500 ease-in-out text-white font-bold uppercase">
               pdf
             </button>
