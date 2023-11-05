@@ -46,7 +46,7 @@ const Model = ({ setModel }) => {
           />
         </svg>
       </button>
-      <div className=" min-w-[310px] p-3 rounded-lg bg-white grid gap-2 grid-cols-2 min-h-auto">
+      <div className=" min-w-[300px] p-3 rounded-lg bg-white grid gap-2 grid-cols-2 min-h-auto">
         <FormInput
           type="text"
           label="Name"
