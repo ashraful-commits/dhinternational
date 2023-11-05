@@ -19,6 +19,7 @@ const Model = ({ setModel }) => {
     deliveryType: "",
     bankName: "",
     cashoutType: "",
+    orderSource: "",
   });
   const handleInputChange = (e) => {
     setInput((prev) => ({
@@ -45,7 +46,7 @@ const Model = ({ setModel }) => {
           />
         </svg>
       </button>
-      <div className=" min-w-[350px] bg-white grid gap-2 grid-cols-2 min-h-auto">
+      <div className=" min-w-[310px] p-3 rounded-lg bg-white grid gap-2 grid-cols-2 min-h-auto">
         <FormInput
           type="text"
           label="Name"
@@ -460,6 +461,35 @@ const Model = ({ setModel }) => {
             <option className="py-[5px] text-[14px]" value="Return">
               Return
             </option>
+          </select>
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="" className="mt-[6px]">
+            Order Source
+          </label>
+          <select
+            name="orderSource"
+            onChange={handleInputChange}
+            value={input.orderSource}
+            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+            id=""
+          >
+            <option className="py-[5px] text-[14px]" value="Facebook">
+              Facebook
+            </option>
+            <option className="py-[5px] text-[14px]" value="WhatsApp">
+              WhatsApp
+            </option>
+            <option className="py-[5px] text-[14px]" value="Email">
+              Email
+            </option>
+            <option className="py-[5px] text-[14px]" value="TikTok">
+              TikTok
+            </option>
+            <option className="py-[5px] text-[14px]" value="Instagram">
+              Instagram
+            </option>
+            {/* Add more order sources here */}
           </select>
         </div>
       </div>
