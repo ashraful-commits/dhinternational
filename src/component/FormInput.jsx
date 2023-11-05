@@ -11,7 +11,7 @@ const FormInput = ({
 }) => {
   return (
     <div className="flex flex-col gap-2 my-2">
-      <label className="text-[16px] text-[]  font-[500]" htmlFor="">
+      <label className="text-[14px] font-bold" htmlFor="">
         {label}
       </label>
       <input

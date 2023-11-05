@@ -211,7 +211,7 @@ const Model = ({ setModel }) => {
             handleInputChange={handleInputChange}
           />
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px]  font-bold">
               Email type
             </label>
             <select
@@ -247,7 +247,7 @@ const Model = ({ setModel }) => {
             handleInputChange={handleInputChange}
           />
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px] font-bold">
               Mobile type
             </label>
             <select
@@ -291,7 +291,7 @@ const Model = ({ setModel }) => {
             handleInputChange={handleInputChange}
           />
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px] font-bold">
               Delivery type
             </label>
             <select
@@ -327,7 +327,7 @@ const Model = ({ setModel }) => {
             </select>
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px] font-bold">
               Bank Name
             </label>
             <select
@@ -359,7 +359,7 @@ const Model = ({ setModel }) => {
             handleInputChange={handleInputChange}
           />
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px] font-bold">
               City
             </label>
             <Select
@@ -382,7 +382,7 @@ const Model = ({ setModel }) => {
           />
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px] font-bold">
               Cashout type
             </label>
             <select
@@ -419,7 +419,7 @@ const Model = ({ setModel }) => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px] font-bold">
               Gender
             </label>
             <select
@@ -440,7 +440,7 @@ const Model = ({ setModel }) => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px] font-bold">
               Order status
             </label>
             <select
@@ -469,7 +469,7 @@ const Model = ({ setModel }) => {
             </select>
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="mt-[6px]">
+            <label htmlFor="" className="mt-[6px] text-[14px] font-bold">
               Order Source
             </label>
             <select
