@@ -5,11 +5,47 @@ import Header from "../component/Header";
 const Home = () => {
   const columns = [
     {
-      name: "Title",
+      name: "Avatar",
       selector: (row) => row.title,
     },
     {
-      name: "Year",
+      name: "Name",
+      selector: (row) => row.title,
+    },
+    {
+      name: "Gender",
+      selector: (row) => row.title,
+    },
+    {
+      name: "City",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Mobile",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Number Type",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Email",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Email Type",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Occupation",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Order Date",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Birthday",
       selector: (row) => row.year,
     },
   ];
@@ -29,7 +65,13 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <DataTable columns={columns} data={data} />
+      <DataTable
+        responsive={true}
+        pagination
+        columns={columns}
+        data={data}
+        expandableRows
+      />
     </div>
   );
 };
