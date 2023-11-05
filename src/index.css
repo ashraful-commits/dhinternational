@@ -18,14 +18,14 @@ body {
 .rdt_TableRow {
 }
 .rdt_TableCol {
-  min-width: 150px !important;
+  min-width: 100px !important;
   display: flex !important;
   justify-content: start !important;
 }
 .rdt_TableCol_Sortable {
 }
 .rdt_TableCell {
-  min-width: 150px !important;
+  min-width: 100px !important;
   display: flex !important;
   justify-content: start !important;
 }
