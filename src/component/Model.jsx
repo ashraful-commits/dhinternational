@@ -178,324 +178,349 @@ const Model = ({ setModel }) => {
       </button>
       <form
         onSubmit={handleSubmit}
-        className=" min-w-[300px] min-h-[500px] h-[500px] overflow-y-auto p-3 rounded-lg bg-white grid gap-2 grid-cols-2 min-h-auto"
+        className=" min-w-[300px] min-h-[500px] h-[500px] overflow-y-auto  relative rounded-lg  bg-white min-h-auto"
       >
-        <FormInput
-          type="text"
-          label="Name"
-          name="name"
-          value={input.name}
-          placeholder="Name"
-          handleInputChange={handleInputChange}
-        />
-        <FormInput
-          name="productName"
-          placeholder="Product name"
-          type="text"
-          label="Product Name"
-          value={input.productName}
-          handleInputChange={handleInputChange}
-        />
-        <FormInput
-          name="email"
-          placeholder="Name"
-          type="email"
-          label="Email"
-          value={input.email}
-          handleInputChange={handleInputChange}
-        />
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            Email type
-          </label>
-          <select
-            name="emailType"
-            onChange={handleInputChange}
-            value={input.emailType}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option selected className="py-[5px] text-[14px]" value="Personal">
-              Personal
-            </option>
-            <option className="py-[5px] text-[14px]" value="Office">
-              Office
-            </option>
-          </select>
+        <div className="sticky top-[0] py-1  border-b col-span-2 bg-white w-full">
+          <h1 className="text-[20px]   text-blue-500 font-bold text-center uppercase">
+            Add new customer
+          </h1>
         </div>
-        <FormInput
-          name="mobile"
-          placeholder="Mobile"
-          type="text"
-          label="Mobile"
-          value={input.mobile}
-          handleInputChange={handleInputChange}
-        />
-        <FormInput
-          name="refMobile"
-          placeholder="Ref Mobile"
-          type="text"
-          label="Ref Mobile"
-          value={input.refMobile}
-          handleInputChange={handleInputChange}
-        />
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            Mobile type
-          </label>
-          <select
-            name="mobileType"
-            onChange={handleInputChange}
-            value={input.mobileType}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option selected className="py-[5px] text-[14px]" value="Personal">
-              Personal
-            </option>
-            <option className="py-[5px] text-[14px]" value="Office">
-              Office
-            </option>
-          </select>
-        </div>
-        <FormInput
-          name="occupation"
-          placeholder="Occupation"
-          type="text"
-          label="Occupation"
-          value={input.occupation}
-          handleInputChange={handleInputChange}
-        />
-        <FormInput
-          name="orderDate"
-          placeholder="Occupation"
-          type="date"
-          label="Order Date"
-          value={input.orderDate}
-          handleInputChange={handleInputChange}
-        />
-        <FormInput
-          name="deliveryDate"
-          placeholder="Delivery date"
-          type="date"
-          label="Delivery Date"
-          value={input.deliveryDate}
-          handleInputChange={handleInputChange}
-        />
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            Delivery type
-          </label>
-          <select
-            name="deliveryType"
-            onChange={handleInputChange}
-            value={input.deliveryType}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option className="py-[5px] text-[14px]" value="Cash on delivery">
-              Cash on delivery
-            </option>
-            <option className="py-[5px] text-[14px]" value="Office">
-              Office
-            </option>
-            {/* Add more delivery types here */}
-            <option className="py-[5px] text-[14px]" value="Home delivery">
-              Home delivery
-            </option>
-            <option className="py-[5px] text-[14px]" value="Pickup point">
-              Pickup point
-            </option>
-            <option
-              selected
-              className="py-[5px] text-[14px]"
-              value="Express delivery"
-            >
-              Express delivery
-            </option>
-            <option className="py-[5px] text-[14px]" value="Scheduled delivery">
-              Scheduled delivery
-            </option>
-          </select>
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            Bank Name
-          </label>
-          <select
-            name="bankName"
-            onChange={handleInputChange}
-            value={input.bankName}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option className="py-[5px] text-[14px]" value="Bkash">
-              Bkash
-            </option>
-            <option className="py-[5px] text-[14px]" value="DBBL">
-              DBBL
-            </option>
-            {/* Add more delivery types here */}
-            <option className="py-[5px] text-[14px]" value="Nogod">
-              Nogod
-            </option>
-          </select>
-        </div>
-        <FormInput
-          name="birthday"
-          placeholder="Birthday"
-          type="date"
-          label="Birthday"
-          value={input.birthday}
-          handleInputChange={handleInputChange}
-        />
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            City
-          </label>
-          <Select
-            name="city"
-            value={selectedCity}
-            onChange={handleCityChange}
-            options={cities}
-            placeholder="Select a city"
-            isSearchable={true}
-            className="bg-blue-300"
+        <div className="p-2  grid gap-2 grid-cols-2">
+          <FormInput
+            type="text"
+            label="Name"
+            name="name"
+            value={input.name}
+            placeholder="Name"
+            handleInputChange={handleInputChange}
           />
-        </div>
-        <FormInput
-          name="address"
-          placeholder="Address"
-          type="text"
-          label="Address"
-          value={input.address}
-          handleInputChange={handleInputChange}
-        />
-
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            Cashout type
-          </label>
-          <select
-            name="cashoutType"
-            onChange={handleInputChange}
-            value={input.cashoutType}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option className="py-[5px] text-[14px]" value="Cash on delivery">
-              Cash on delivery
-            </option>
-            <option
-              selected
-              className="py-[5px] text-[14px]"
-              value="Bank transfer"
+          <FormInput
+            name="productName"
+            placeholder="Product name"
+            type="text"
+            label="Product Name"
+            value={input.productName}
+            handleInputChange={handleInputChange}
+          />
+          <FormInput
+            name="email"
+            placeholder="Name"
+            type="email"
+            label="Email"
+            value={input.email}
+            handleInputChange={handleInputChange}
+          />
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              Email type
+            </label>
+            <select
+              name="emailType"
+              onChange={handleInputChange}
+              value={input.emailType}
+              className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+              id=""
             >
-              Bank transfer
-            </option>
-            <option className="py-[5px] text-[14px]" value="PayPal">
-              PayPal
-            </option>
-            <option className="py-[5px] text-[14px]" value="Cheque">
-              Cheque
-            </option>
-            <option className="py-[5px] text-[14px]" value="Mobile wallet">
-              Mobile wallet
-            </option>
-            <option className="py-[5px] text-[14px]" value="Credit card refund">
-              Credit card refund
-            </option>
-            {/* Add more cashout types here */}
-          </select>
-        </div>
+              <option
+                selected
+                className="py-[5px] text-[14px]"
+                value="Personal"
+              >
+                Personal
+              </option>
+              <option className="py-[5px] text-[14px]" value="Office">
+                Office
+              </option>
+            </select>
+          </div>
+          <FormInput
+            name="mobile"
+            placeholder="Mobile"
+            type="text"
+            label="Mobile"
+            value={input.mobile}
+            handleInputChange={handleInputChange}
+          />
+          <FormInput
+            name="refMobile"
+            placeholder="Ref Mobile"
+            type="text"
+            label="Ref Mobile"
+            value={input.refMobile}
+            handleInputChange={handleInputChange}
+          />
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              Mobile type
+            </label>
+            <select
+              name="mobileType"
+              onChange={handleInputChange}
+              value={input.mobileType}
+              className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+              id=""
+            >
+              <option
+                selected
+                className="py-[5px] text-[14px]"
+                value="Personal"
+              >
+                Personal
+              </option>
+              <option className="py-[5px] text-[14px]" value="Office">
+                Office
+              </option>
+            </select>
+          </div>
+          <FormInput
+            name="occupation"
+            placeholder="Occupation"
+            type="text"
+            label="Occupation"
+            value={input.occupation}
+            handleInputChange={handleInputChange}
+          />
+          <FormInput
+            name="orderDate"
+            placeholder="Occupation"
+            type="date"
+            label="Order Date"
+            value={input.orderDate}
+            handleInputChange={handleInputChange}
+          />
+          <FormInput
+            name="deliveryDate"
+            placeholder="Delivery date"
+            type="date"
+            label="Delivery Date"
+            value={input.deliveryDate}
+            handleInputChange={handleInputChange}
+          />
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              Delivery type
+            </label>
+            <select
+              name="deliveryType"
+              onChange={handleInputChange}
+              value={input.deliveryType}
+              className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+              id=""
+            >
+              <option className="py-[5px] text-[14px]" value="Cash on delivery">
+                Cash on delivery
+              </option>
+              <option className="py-[5px] text-[14px]" value="Office">
+                Office
+              </option>
+              {/* Add more delivery types here */}
+              <option className="py-[5px] text-[14px]" value="Home delivery">
+                Home delivery
+              </option>
+              <option className="py-[5px] text-[14px]" value="Pickup point">
+                Pickup point
+              </option>
+              <option
+                selected
+                className="py-[5px] text-[14px]"
+                value="Express delivery"
+              >
+                Express delivery
+              </option>
+              <option
+                className="py-[5px] text-[14px]"
+                value="Scheduled delivery"
+              >
+                Scheduled delivery
+              </option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              Bank Name
+            </label>
+            <select
+              name="bankName"
+              onChange={handleInputChange}
+              value={input.bankName}
+              className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+              id=""
+            >
+              <option className="py-[5px] text-[14px]" value="Bkash">
+                Bkash
+              </option>
+              <option className="py-[5px] text-[14px]" value="DBBL">
+                DBBL
+              </option>
+              {/* Add more delivery types here */}
+              <option className="py-[5px] text-[14px]" value="Nogod">
+                Nogod
+              </option>
+            </select>
+          </div>
+          <FormInput
+            name="birthday"
+            placeholder="Birthday"
+            type="date"
+            label="Birthday"
+            value={input.birthday}
+            handleInputChange={handleInputChange}
+          />
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              City
+            </label>
+            <Select
+              name="city"
+              value={selectedCity}
+              onChange={handleCityChange}
+              options={cities}
+              placeholder="Select a city"
+              isSearchable={true}
+              className="bg-blue-300"
+            />
+          </div>
+          <FormInput
+            name="address"
+            placeholder="Address"
+            type="text"
+            label="Address"
+            value={input.address}
+            handleInputChange={handleInputChange}
+          />
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            Gender
-          </label>
-          <select
-            name="gender"
-            onChange={handleInputChange}
-            value={input.gender}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option selected className="py-[5px] text-[14px]" value="Man">
-              Man
-            </option>
-            <option className="py-[5px] text-[14px]" value="Women">
-              Women
-            </option>
-          </select>
-        </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              Cashout type
+            </label>
+            <select
+              name="cashoutType"
+              onChange={handleInputChange}
+              value={input.cashoutType}
+              className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+              id=""
+            >
+              <option className="py-[5px] text-[14px]" value="Cash on delivery">
+                Cash on delivery
+              </option>
+              <option
+                selected
+                className="py-[5px] text-[14px]"
+                value="Bank transfer"
+              >
+                Bank transfer
+              </option>
+              <option className="py-[5px] text-[14px]" value="PayPal">
+                PayPal
+              </option>
+              <option className="py-[5px] text-[14px]" value="Cheque">
+                Cheque
+              </option>
+              <option className="py-[5px] text-[14px]" value="Mobile wallet">
+                Mobile wallet
+              </option>
+              <option
+                className="py-[5px] text-[14px]"
+                value="Credit card refund"
+              >
+                Credit card refund
+              </option>
+              {/* Add more cashout types here */}
+            </select>
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            Order status
-          </label>
-          <select
-            name="orderStatus"
-            onChange={handleInputChange}
-            value={input.orderStatus}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option selected className="py-[5px] text-[14px]" value="Pending">
-              Pending
-            </option>
-            <option className="py-[5px] text-[14px]" value="Complete">
-              Complete
-            </option>
-            <option className="py-[5px] text-[14px]" value="Ongoing">
-              Ongoing
-            </option>
-            <option className="py-[5px] text-[14px]" value="Cancel">
-              Cancel
-            </option>
-            <option className="py-[5px] text-[14px]" value="Return">
-              Return
-            </option>
-          </select>
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="mt-[6px]">
-            Order Source
-          </label>
-          <select
-            name="orderSource"
-            onChange={handleInputChange}
-            value={input.orderSource}
-            className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
-            id=""
-          >
-            <option selected className="py-[5px] text-[14px]" value="Facebook">
-              Facebook
-            </option>
-            <option className="py-[5px] text-[14px]" value="WhatsApp">
-              WhatsApp
-            </option>
-            <option className="py-[5px] text-[14px]" value="Email">
-              Email
-            </option>
-            <option className="py-[5px] text-[14px]" value="TikTok">
-              TikTok
-            </option>
-            <option className="py-[5px] text-[14px]" value="Instagram">
-              Instagram
-            </option>
-            {/* Add more order sources here */}
-          </select>
-        </div>
-        <div className="flex flex-col gap-[5px]">
-          <button className="bg-red-500 h-[32px] hover:bg-red-800 transition-all duration-500 ease-in-out text-white font-bold uppercase">
-            pdf
-          </button>
-          <button
-            type="submit"
-            className="bg-purple-500 h-[35px] hover:bg-purple-800 transition-all duration-500 ease-in-out text-white uppercase text-[14px] font-bold"
-          >
-            Add customer
-          </button>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              Gender
+            </label>
+            <select
+              name="gender"
+              onChange={handleInputChange}
+              value={input.gender}
+              className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+              id=""
+            >
+              <option selected className="py-[5px] text-[14px]" value="Man">
+                Man
+              </option>
+              <option className="py-[5px] text-[14px]" value="Women">
+                Women
+              </option>
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              Order status
+            </label>
+            <select
+              name="orderStatus"
+              onChange={handleInputChange}
+              value={input.orderStatus}
+              className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+              id=""
+            >
+              <option selected className="py-[5px] text-[14px]" value="Pending">
+                Pending
+              </option>
+              <option className="py-[5px] text-[14px]" value="Complete">
+                Complete
+              </option>
+              <option className="py-[5px] text-[14px]" value="Ongoing">
+                Ongoing
+              </option>
+              <option className="py-[5px] text-[14px]" value="Cancel">
+                Cancel
+              </option>
+              <option className="py-[5px] text-[14px]" value="Return">
+                Return
+              </option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="" className="mt-[6px]">
+              Order Source
+            </label>
+            <select
+              name="orderSource"
+              onChange={handleInputChange}
+              value={input.orderSource}
+              className="h-[35px] bg-blue-300 px-2 focus:outline-none border-[1px] border-white focus:border-blue-600"
+              id=""
+            >
+              <option
+                selected
+                className="py-[5px] text-[14px]"
+                value="Facebook"
+              >
+                Facebook
+              </option>
+              <option className="py-[5px] text-[14px]" value="WhatsApp">
+                WhatsApp
+              </option>
+              <option className="py-[5px] text-[14px]" value="Email">
+                Email
+              </option>
+              <option className="py-[5px] text-[14px]" value="TikTok">
+                TikTok
+              </option>
+              <option className="py-[5px] text-[14px]" value="Instagram">
+                Instagram
+              </option>
+              {/* Add more order sources here */}
+            </select>
+          </div>
+          <div className="grid grid-cols-2  gap-[5px] sticky bottom-0 col-span-2">
+            <button className="bg-red-500 h-[35px] hover:bg-red-800 transition-all duration-500 ease-in-out text-white font-bold uppercase">
+              pdf
+            </button>
+            <button
+              type="submit"
+              className="bg-purple-500 h-[35px] hover:bg-purple-800 transition-all duration-500 ease-in-out text-white uppercase text-[14px] font-bold"
+            >
+              Add customer
+            </button>
+          </div>
         </div>
       </form>
     </div>

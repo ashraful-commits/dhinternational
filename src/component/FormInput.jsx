@@ -18,6 +18,7 @@ const FormInput = ({
         className={`h-[32px] placeholder:text-[12px] px-2 rounded-sm border-[1px] focus:outline-none border-white bg-blue-300 placeholder:text-white focus:border-blue-500  ${styles}`}
         name={name}
         type={type}
+        required
         onChange={handleInputChange}
         value={value}
         placeholder={placeholder}
