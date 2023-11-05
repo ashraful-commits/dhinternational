@@ -1,11 +1,17 @@
 import React from "react";
 import DataTable from "react-data-table-component";
 import Header from "../component/Header";
+import SerarchBar from "../component/SearchBar";
+import SearchBar from "../component/SearchBar";
 
 const Home = () => {
   const columns = [
     {
       name: "Avatar",
+      selector: (row) => row.title,
+    },
+    {
+      name: "Product Name",
       selector: (row) => row.title,
     },
     {
@@ -25,6 +31,10 @@ const Home = () => {
       selector: (row) => row.year,
     },
     {
+      name: "Ref Number",
+      selector: (row) => row.year,
+    },
+    {
       name: "Number Type",
       selector: (row) => row.year,
     },
@@ -41,11 +51,28 @@ const Home = () => {
       selector: (row) => row.year,
     },
     {
-      name: "Order Date",
+      name: "Order date",
       selector: (row) => row.year,
     },
     {
       name: "Birthday",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Delivery date",
+      selector: (row) => row.year,
+    },
+    {
+      name: "Delivery Type",
+      selector: (row) => row.year,
+    },
+    {
+      name: "cashout Type",
+      selector: (row) => row.year,
+    },
+
+    {
+      name: "Bank details",
       selector: (row) => row.year,
     },
   ];
@@ -63,8 +90,9 @@ const Home = () => {
     },
   ];
   return (
-    <div>
+    <div className="w-full relative">
       <Header />
+      <SearchBar />
       <DataTable
         responsive={true}
         pagination
