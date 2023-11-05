@@ -94,6 +94,10 @@ const Home = () => {
       selector: (row) => row.bankName,
     },
     {
+      name: "Order Status",
+      selector: (row) => row.orderStatus,
+    },
+    {
       name: "Action",
       selector: (row) => (
         <div className="flex gap-2 items-center justify-center">
