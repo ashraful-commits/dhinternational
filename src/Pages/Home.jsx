@@ -81,6 +81,10 @@ const Home = () => {
       selector: (row) => row.deliveryType,
     },
     {
+      name: "Medical",
+      selector: (row) => row.medical,
+    },
+    {
       name: "Cashout Type",
       selector: (row) => row.cashoutType,
     },
@@ -97,10 +101,7 @@ const Home = () => {
       name: "Order Status",
       selector: (row) => row.orderStatus,
     },
-    {
-      name: "Medical",
-      selector: (row) => row.medical,
-    },
+
     {
       name: "Action",
       selector: (row) => (
