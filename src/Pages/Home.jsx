@@ -98,6 +98,10 @@ const Home = () => {
       selector: (row) => row.orderStatus,
     },
     {
+      name: "Medical",
+      selector: (row) => row.medical,
+    },
+    {
       name: "Action",
       selector: (row) => (
         <div className="flex gap-2 items-center justify-center">

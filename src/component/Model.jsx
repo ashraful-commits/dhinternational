@@ -35,6 +35,7 @@ const Model = ({ setModel, singleData, title, singleId }) => {
     cashoutType: "",
     orderSource: "",
     address: "",
+    medical: "",
   });
   const [pdf, setPdf] = useState(false);
   const handleInputChange = (e) => {
@@ -567,6 +568,14 @@ const Model = ({ setModel, singleData, title, singleId }) => {
                   {/* Add more order sources here */}
                 </select>
               </div>
+              <FormInput
+                name="medical"
+                placeholder="Medical"
+                type="text"
+                label="Medical"
+                value={input.medical}
+                handleInputChange={handleInputChange}
+              />
               <div className="grid grid-cols-2 bg-white  gap-[5px] sticky bottom-[0] pb-[12px] col-span-2">
                 <span
                   onClick={handlePdf}
@@ -763,6 +772,17 @@ const Model = ({ setModel, singleData, title, singleId }) => {
                       Order Source
                     </label>
                     <p>{input.orderSource}</p>
+                  </div>
+                </div>
+                <div className="flex flex-col gap- bro">
+                  <div className="flex flex-col gap- bro">
+                    <label
+                      htmlFor=""
+                      className="mt-[6px] text-[14px]  font-bold"
+                    >
+                      Medical
+                    </label>
+                    <p>{input.medical}</p>
                   </div>
                 </div>
               </div>
