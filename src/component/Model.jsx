@@ -585,10 +585,10 @@ const Model = ({ setModel, singleData, title, singleId }) => {
           </div>
         )}
         {pdf && (
-          <div className="w-full min-w-[300px] flex flex-col  min-h-[500px]  h-full pb-10 left-0">
+          <div className="w-full min-w-[300px] p-[10px] flex flex-col  min-h-[500px]  h-full  left-0">
             <button
               onClick={() => setPdf(false)}
-              className="absolute top-1 left-2 z-[9999]"
+              className="absolute top-3 left-2 z-[9999] "
             >
               <svg
                 width="22"
@@ -604,7 +604,7 @@ const Model = ({ setModel, singleData, title, singleId }) => {
             <div
               ref={pdfRef}
               size="a4"
-              className="pdf bg-white w-full h-full file"
+              className="pdf bg-white w-full h-full p-2 file"
             >
               <div className="sticky top-0 py-1 bro col-span-2 bg-white w-full">
                 <h1 className="text-[20px]   text-blue-500 font-bold text-center uppercase">
